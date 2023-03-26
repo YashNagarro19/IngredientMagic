@@ -3,7 +3,7 @@ import azure.functions as func
 import json
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+    logging.info('Python HTTP trigger function processed a req.')
 
     name = req.params.get('name')
     if not name:
@@ -34,7 +34,7 @@ def businessLogicTextConversion(requestBody,ingredientsList):
         resp_dict = createResponse(avgRating,avoidItems)
         responseJson = json.dumps(resp_dict, indent=4)
     except Exception as ex:
-        responseJson =json.dumps("Some of these ingredients are not present in list. Please try sometime.")
+        responseJson =json.dumps("Some of these ingredients are not present in list. Please try sometime. Error: " + (str)(ex))
         
     return responseJson
      
@@ -44,7 +44,7 @@ def createResponse(avgRating,avoidItems):
 
 def ingredientsList():
     ingredientsList = {
-      "Spinach": "4.9",
+    "Spinach": "4.9",
     "Kale": "4.8",
     "Swiss chard": "4.8",
     "Blueberries": "4.4",
@@ -222,10 +222,10 @@ def ingredientsList():
     "Acidifying agent (330)": "3.5",
     "Mineral (508)": "3.5",
     "Flavour enhancer (635)":"3.5",
-        "Dextrin":"2.6",
-        "Carrageenan":"2.6",
-        "Cellulose Gum":"2.6",
-        "Potassium Citrate":"2.6",
+    "Dextrin":"2.6",
+    "Carrageenan":"2.6",
+    "Cellulose Gum":"2.6",
+    "Potassium Citrate":"2.6",
 }
    
     return ingredientsList
